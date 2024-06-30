@@ -3,10 +3,10 @@ package com.tlba.tregueux.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.tlba.DTO.TeamDTO;
-import org.tlba.MapperDTO.DtoConvertisseur;
-import org.tlba.Repo.TeamRepository;
-import org.tlba.entities.Team;
+import com.tlba.tregueux.DTO.TeamDTO;
+import com.tlba.tregueux.MapperDTO.DtoConvertisseur;
+import com.tlba.tregueux.Repo.TeamRepository;
+import com.tlba.tregueux.entities.Team;
 
 import java.util.List;
 import java.util.Optional;

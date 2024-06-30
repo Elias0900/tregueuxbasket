@@ -1,6 +1,6 @@
 package com.tlba.tregueux.Service;
 
-import org.tlba.DTO.TeamDTO;
+import com.tlba.tregueux.DTO.TeamDTO;
 
 import java.util.List;
 

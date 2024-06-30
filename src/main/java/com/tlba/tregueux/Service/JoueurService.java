@@ -1,6 +1,7 @@
 package com.tlba.tregueux.Service;
 
-import org.tlba.DTO.JoueurDTO;
+import com.tlba.tregueux.DTO.JoueurDTO;
+import com.tlba.tregueux.Exception.JoueurException;
 
 import java.util.List;
 
@@ -10,13 +11,13 @@ public interface JoueurService {
 
     List<JoueurDTO> getAll();
 
-    JoueurDTO saveOrUpdate(JoueurDTO j) throws Exception;
+    JoueurDTO saveOrUpdate(JoueurDTO j) throws JoueurException;
 
-    JoueurDTO update(JoueurDTO j) throws Exception;
+    JoueurDTO update(JoueurDTO j) throws JoueurException;
 
-    JoueurDTO findById(long id) throws Exception;
+    JoueurDTO findById(long id) throws JoueurException;
 
-    JoueurDTO findByNom(String nom) throws Exception;
+    JoueurDTO findByNom(String nom) throws JoueurException;
 
     void suppressionJoueur(long id);
 

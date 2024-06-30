@@ -1,12 +1,13 @@
 package com.tlba.tregueux.Service;
 
+import com.tlba.tregueux.Exception.JoueurException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.tlba.DTO.JoueurDTO;
-import org.tlba.MapperDTO.DtoConvertisseur;
-import org.tlba.Repo.JoueurRepo;
-import org.tlba.entities.Joueur;
+import com.tlba.tregueux.DTO.JoueurDTO;
+import com.tlba.tregueux.MapperDTO.DtoConvertisseur;
+import com.tlba.tregueux.Repo.JoueurRepo;
+import com.tlba.tregueux.entities.Joueur;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,16 +29,16 @@ public class JoueurServiceImpl implements JoueurService {
     }
 
     @Override
-    public JoueurDTO saveOrUpdate(JoueurDTO joueurDTO) throws Exception {
+    public JoueurDTO saveOrUpdate(JoueurDTO joueurDTO) throws JoueurException {
         Joueur joueur = DtoConvertisseur.convert(joueurDTO, Joueur.class);
         Joueur savedJoueur = joueurRepository.save(joueur);
         return DtoConvertisseur.convert(savedJoueur, JoueurDTO.class);
     }
 
     @Override
-    public JoueurDTO update(JoueurDTO joueurDTO) throws Exception {
+    public JoueurDTO update(JoueurDTO joueurDTO) throws JoueurException {
         if (joueurDTO.getId() == null) {
-            throw new IllegalArgumentException("Joueur id cannot be null for update.");
+            throw new JoueurException("Joueur id cannot be null for update.");
         }
 
         Optional<Joueur> optionalJoueur = joueurRepository.findById(joueurDTO.getId());
@@ -53,29 +54,29 @@ public class JoueurServiceImpl implements JoueurService {
             Joueur updatedJoueur = joueurRepository.save(joueur);
             return DtoConvertisseur.convert(updatedJoueur, JoueurDTO.class);
         } else {
-            throw new Exception("Joueur not found with id: " + joueurDTO.getId());
+            throw new JoueurException("Joueur not found with id: " + joueurDTO.getId());
         }
     }
 
     @Override
-    public JoueurDTO findById(long id) throws Exception {
+    public JoueurDTO findById(long id) throws JoueurException {
         Optional<Joueur> optionalJoueur = joueurRepository.findById(id);
         if (optionalJoueur.isPresent()) {
             Joueur joueur = optionalJoueur.get();
             return DtoConvertisseur.convert(joueur, JoueurDTO.class);
         } else {
-            throw new Exception("Joueur not found with id: " + id);
+            throw new JoueurException("Joueur not found with id: " + id);
         }
     }
 
     @Override
-    public JoueurDTO findByNom(String nom) throws Exception {
+    public JoueurDTO findByNom(String nom) throws JoueurException {
         Optional<Joueur> optionalJoueur = Optional.ofNullable(joueurRepository.findByNom(nom));
         if (optionalJoueur.isPresent()) {
             Joueur joueur = optionalJoueur.get();
             return DtoConvertisseur.convert(joueur, JoueurDTO.class);
         } else {
-            throw new Exception("Joueur not found with nom: " + nom);
+            throw new JoueurException("Aucun joueur n'a été trouvé avec le nom: " + nom);
         }
     }
 
