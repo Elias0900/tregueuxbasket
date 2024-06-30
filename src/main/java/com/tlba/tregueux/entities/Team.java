@@ -27,4 +27,5 @@ public class Team {
 
     @ManyToMany
     private Set<Joueur> joueurs = new HashSet<>();
+
 }
